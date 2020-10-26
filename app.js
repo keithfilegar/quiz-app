@@ -84,6 +84,7 @@ function generateQuizStart() {
   return `
     <div class="content-container">
       <p>This is a quiz about movie quotes. Click below to begin!</p>
+      <br>
       <button class="js-start-quiz-button">Start Quiz</button>
     </div>`;
 }
