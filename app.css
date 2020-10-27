@@ -34,7 +34,7 @@ h3 {
 
 p {
   margin-left: 25px;
-  margin-top: 80px;
+  margin-top: 50px;
   margin-bottom: 30px;
   font-size: x-large;
   text-align: center;
@@ -68,20 +68,13 @@ background-color: rgba(198, 198, 198, 0.7);
   margin-left: 30px;
 }
 
-.start-button-container, .next-button-container {
-  margin-top: 50px;
+.start-button-container, .next-button-container, .restart-button-container{
+  margin: 0;
   text-align: center;
 }
 
 .submit-button{
   margin-top: 30px;
-}
-
-.poster-display {
-  background-repeat: no-repeat;
-  height: 100%;
-  margin: auto;
-  background-position: right;
 }
 
 .content-container {  

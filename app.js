@@ -149,8 +149,10 @@ function generateQuizEndPage() {
   return `
   <div class="content-container">
     <h2>Your Score is ${score}/5</h2>
-    <h3>Want to try again? Click the button below to restart the quiz!</h3>
-    <button class="js-restart-button" type="reset">Restart Quiz</button>
+    <p>Want to try again? Click the button below to restart the quiz!</p>
+    <div class="restart-button-container">
+      <button class="js-restart-button restart-button" type="reset">Restart Quiz</button>
+    </div>
   </div>`;
 }
   
