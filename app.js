@@ -83,8 +83,11 @@ const store = {
 function generateQuizStart() {
   return `
     <div class="content-container">
-      <p>This is a quiz about movie quotes. Click below to begin!</p>
-      <button class="js-start-quiz-button">Start Quiz</button>
+      <p class="quiz-start-prompt">This is a quiz about movie quotes. Click below to begin!</p>
+      <br>
+      <div class="start-button-container">
+        <button class="js-start-quiz-button">Start Quiz</button>
+      </div>
     </div>`;
 }
 
@@ -96,9 +99,9 @@ function generateQuizPage() {
   <div class="content-container">
     <h2>Question ${store.questionNumber + 1}/5</h2>
     <h2>${store.score}/5 questions correct</h2>
-    <h3>${store.questionNumber + 1}. What film is this quote from?</h3>
+    <h3 class="prompt">${store.questionNumber + 1}. What film is this quote from?</h3>
         <form id="quiz-form">
-            <h3>${question}</h3>
+            <h3 class="question"><i>${question}</i></h3>
             <input type="radio" id="answer1" name="answer" value="${answerArray[0]}" required>
             <label for="${answerArray[0]}">${answerArray[0]}</label><br>
             <input type="radio" id="answer2" name="answer" value="${answerArray[1]}" required>
@@ -107,7 +110,7 @@ function generateQuizPage() {
             <label for="${answerArray[2]}">${answerArray[2]}</label><br>
             <input type="radio" id="answer4" name="answer" value="${answerArray[3]}" required>
             <label for="${answerArray[3]}">${answerArray[3]}</label><br>
-            <button type="submit" class="js-answer-submit">Submit</button>
+            <button type="submit" class="js-answer-submit submit-button">Submit</button>
         </form>
   </div>`;
 }
@@ -116,11 +119,13 @@ function generateCorrectResponseFeedback() {
   let correctAnswer = store.questions[store.questionNumber].correctAnswer;
 
   return `
-  <div class="content-container">
+  <div class="content-container group">
     <h2>Question ${store.questionNumber + 1}/5</h2>
     <h2>${store.score}/5 questions correct</h2>
     <p>${correctAnswer} is correct!</p>
-    <button class="js-next-question" type="submit">Next Question</button>
+    <div class="next-button-container">
+      <button class="js-next-question next-button" type="submit">Next Question</button>
+    </div>
   </div>`
 }
 
@@ -132,7 +137,9 @@ function generateIncorrectResponseFeedback() {
     <h2>Question ${store.questionNumber + 1}/5</h2>
     <h2>${store.score}/5 questions correct</h2>
     <p>Oops! The correct answer was ${correctAnswer}</p>
-    <button class="js-next-question" type="submit">Next Question</button>
+    <div class="next-button-container">
+      <button class="js-next-question next-button" type="submit">Next Question</button>
+    </div>
   </div>`
 }
 
@@ -142,8 +149,10 @@ function generateQuizEndPage() {
   return `
   <div class="content-container">
     <h2>Your Score is ${score}/5</h2>
-    <h3>Want to try again? Click the button below to restart the quiz!</h3>
-    <button class="js-restart-button" type="reset">Restart Quiz</button>
+    <p>Want to try again? Click the button below to restart the quiz!</p>
+    <div class="restart-button-container">
+      <button class="js-restart-button restart-button" type="reset">Restart Quiz</button>
+    </div>
   </div>`;
 }
   
