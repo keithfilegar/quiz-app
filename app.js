@@ -91,14 +91,20 @@ function generateQuizStart() {
     </div>`;
 }
 
+//generates html for current score and question number
+function generateQuizHeading(){
+  return `
+    <h2>Question ${store.questionNumber + 1}/5</h2>
+    <h2>${store.score}/${store.questions.length} questions correct</h2>`;
+}
+
 function generateQuizPage() {
   const answerArray = store.questions[store.questionNumber].answers;
   const question = store.questions[store.questionNumber].question;
 
   return `
   <div class="content-container">
-    <h2>Question ${store.questionNumber + 1}/5</h2>
-    <h2>${store.score}/5 questions correct</h2>
+    ${generateQuizHeading()}
     <h3 class="prompt">${store.questionNumber + 1}. What film is this quote from?</h3>
         <form id="quiz-form">
             <h3 class="question"><i>${question}</i></h3>
@@ -120,13 +126,12 @@ function generateCorrectResponseFeedback() {
 
   return `
   <div class="content-container group">
-    <h2>Question ${store.questionNumber + 1}/5</h2>
-    <h2>${store.score}/5 questions correct</h2>
+    ${generateQuizHeading()}
     <p>${correctAnswer} is correct!</p>
     <div class="next-button-container">
       <button class="js-next-question next-button" type="submit">Next Question</button>
     </div>
-  </div>`
+  </div>`;
 }
 
 function generateIncorrectResponseFeedback() {
@@ -134,13 +139,12 @@ function generateIncorrectResponseFeedback() {
 
   return `
   <div class="content-container">
-    <h2>Question ${store.questionNumber + 1}/5</h2>
-    <h2>${store.score}/5 questions correct</h2>
+    ${generateQuizHeading()}
     <p>Oops! The correct answer was ${correctAnswer}</p>
     <div class="next-button-container">
       <button class="js-next-question next-button" type="submit">Next Question</button>
     </div>
-  </div>`
+  </div>`;
 }
 
 function generateQuizEndPage() {
@@ -190,11 +194,24 @@ function renderQuizEndPage() {
   // These functions handle events (submit, click, etc)
 
 function handleStartQuiz() {
-  //listen for button click on '.js-start-quiz-button'
   $('.js-quiz-container').on('click', `.js-start-quiz-button`, (event) => {
     store.quizStarted = true;
     render();
   });
+}
+
+function handleAnswerSubmission() {
+  $('main').on('submit', '#quiz-form', event => {
+    event.preventDefault();
+    validateAnswer();
+    
+    if(store.answerCorrect === true){
+      renderCorrectAnswer();
+    }
+    else {
+      renderInorrectAnswer();
+    }
+  })
 }
 
 function validateAnswer() {
@@ -205,22 +222,6 @@ function validateAnswer() {
     store.score ++;
     store.answerCorrect = true;
   } 
-  
-}
-
-function handleAnswerSubmission() {
-  $('main').on('submit', '#quiz-form', event => {
-    event.preventDefault();
-    
-    validateAnswer();
-    
-    if(store.answerCorrect === true){
-      renderCorrectAnswer();
-    }
-    else {
-      renderInorrectAnswer();
-    }
-  })
 }
 
 function handleNextQuestion() {
@@ -235,10 +236,10 @@ function handleNextQuestion() {
   })
 }
 
+//reset all store values and render quiz start
 function handleRestartQuiz() {
   $('main').on('click', '.js-restart-button', event => {
     event.preventDefault();
-
     store.questionNumber = 0; 
     store.quizStarted = false;
     store.score = 0;
